@@ -1,6 +1,7 @@
 #include <iostream>
 #include <assert.h>
 #include <cstdint>
+#include <cstring>
 using namespace std;
 
 char nibble_to_hex (uint8_t i)
@@ -123,6 +124,15 @@ void byte_calc (uint16_t op1, char operat, uint16_t op2)
     }
 }
 
+struct Student
+{
+    char name [17];
+    uint16_t year;
+    float average;
+    uint8_t gender: 1;
+    uint8_t courses;
+    Student* starosta;
+};
 
 int main()
 {
@@ -142,4 +152,66 @@ int main()
     assert(nibble_to_hex(0xd) == 'd');
     assert(nibble_to_hex(0xe) == 'e');
     assert(nibble_to_hex(0xf) == 'f');
+    Student students[3]={{"Ilya", 18, 4.5, 1, 1, &students[0]}, {"Nastya", 18, 3.7, 0, 1, nullptr}, {"Olya", 18, 4.6, 0, 1, &students[0]}};
+    cout << "Adres massiva: " << &students
+         << "\nRazmer massiva: " << sizeof(students)
+         << "\nHexadecimal: ";
+    cout << "\n\nAdres elementa massiva: " << &students[0]
+         << "\nRazmer elementa massiva: " << sizeof(students[0]);
+    print_in_hex( &students[0], sizeof( students[0] ) );
+    cout << "\n\nAdres elementa massiva: " << &students[1]
+         << "\nRazmer elementa massiva: " << sizeof(students[1])
+         << "\nHexadecimal: ";
+    print_in_hex( &students[1], sizeof( students[1] ) );
+    cout << "\n\nAdres elementa massiva: " << &students[2]
+         << "\nRazmer elementa massiva: " << sizeof(students[2])
+         << "\nHexadecimal: ";
+    print_in_hex( &students[2], sizeof( students[2] ) );
+
+    cout << "\n\nDlya pervogo elementa massiva:" << endl;
+
+    cout << "\nName:"
+         << "\nAdres: " << &students[0].name
+         << "\nSmeshcheniye ot nachala: " << offsetof( Student, name )
+         << "\nRazmer: " << sizeof( students[0].name )
+         << "\nBinary: ";
+    print_in_binary( &students[0].name, sizeof( students[0].name ) );
+    cout << "\nHexadecimal: ";
+    print_in_hex( &students[0].name, sizeof( students[0].name ) );
+
+    cout << "\n\nYear:"
+         << "\nAdres: " << &students[0].year
+         << "\nSmeshcheniye ot nachala: " << offsetof( Student, year )
+         << "\nRazmer: " << sizeof( students[0].year )
+         << "\nBinary: ";
+    print_in_binary( &students[0].year, sizeof( students[0].year ) );
+    cout << "\nHexadecimal: ";
+    print_in_hex( &students[0].year, sizeof( students[0].year ) );
+
+    cout << "\n\nAverage:"
+         << "\nAdres: " << &students[0].average
+         << "\nSmeshcheniye ot nachala: " << offsetof( Student, average )
+         << "\nRazmer: " << sizeof( students[0].average )
+         << "\nBinary: ";
+    print_in_binary( &students[0].average, sizeof( students[0].average ) );
+    cout << "\nHexadecimal: ";
+    print_in_hex( &students[0].average, sizeof( students[0].average ) );
+
+    cout << "\n\nCourses:"
+         << "\nAdres: " << &students[0].courses
+         << "\nSmeshcheniye ot nachala: " << offsetof( Student, courses )
+         << "\nRazmer: " << sizeof( students[0].courses )
+         << "\nBinary: ";
+    print_in_binary( &students[0].courses, sizeof( students[0].courses ) );
+    cout << "\nHexadecimal: ";
+    print_in_hex( &students[0].courses, sizeof( students[0].courses ) );
+
+    cout << "\n\nStarosta:"
+         << "\nAdres: " << &students[0].starosta
+         << "\nSmeshcheniye ot nachala: " << offsetof( Student, starosta )
+         << "\nRazmer: " << sizeof( students[0].starosta )
+         << "\nBinary: ";
+    print_in_binary( &students[0].starosta, sizeof( students[0].starosta ) );
+    cout << "\nHexadecimal: ";
+    print_in_hex( &students[0].starosta, sizeof( students[0].starosta ) );
 }
