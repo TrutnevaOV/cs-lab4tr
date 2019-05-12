@@ -62,18 +62,67 @@ print_in_binary(uint8_t byte)
 }
 
 void
-print_in_binary(const void* data, size_t size) {
+print_in_binary(const void* data, size_t size)
+{
     const uint8_t* bytes = as_bytes(data);
-    for (size_t i = 0; i < size; i++) {
+    for (size_t i = 0; i < size; i++)
+    {
         print_in_binary(bytes[i]);
-        if ((i + 1) % 4 == 0) {
+        if ((i + 1) % 4 == 0)
+        {
             cout << '\n';
         }
-        else {
+        else
+        {
             cout << ' ';
         }
     }
 }
+
+void byte_calc (uint16_t op1, char operat, uint16_t op2)
+{
+    print_in_hex (&op1, sizeof(op1));
+    cout<<operat<<" ";
+    print_in_hex (&op2, sizeof(op2));
+    cout<<'=';
+    uint16_t byteand = op1 & op2;
+    uint16_t byteor = op1 | op2;
+    uint16_t bytexor = op1 ^ op2;
+    if (operat=='&')
+    {
+        print_in_hex(&byteand, sizeof(byteand) );
+        cout << "\n";
+        print_in_binary( &op1, sizeof(op1) );
+        cout << "& ";
+        print_in_binary( &op2, sizeof(op2));
+        cout << "= ";
+        print_in_binary( &byteand, sizeof(byteand) );
+        return;
+    }
+    if(operat=='|')
+    {
+        print_in_hex( &byteor, sizeof(byteor) );
+        cout << "\n";
+        print_in_binary( &op1, sizeof(op1) );
+        cout << "| ";
+        print_in_binary( &op2, sizeof(op2) );
+        cout << "= ";
+        print_in_binary( &byteor, sizeof(byteor) );
+        return;
+    }
+    if (operat=='^')
+    {
+        print_in_hex( &bytexor, sizeof(bytexor) );
+        cout << "\n";
+        print_in_binary( &op1, sizeof(op1) );
+        cout << "^ ";
+        print_in_binary( &op2, sizeof(op2) );
+        cout << "= ";
+        print_in_binary( &bytexor, sizeof(bytexor) );
+        return;
+    }
+}
+
 
 int main()
 {
