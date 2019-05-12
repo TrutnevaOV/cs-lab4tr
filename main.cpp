@@ -12,7 +12,8 @@ char nibble_to_hex (uint8_t i)
 
 void print_in_hex(uint8_t byte)
 {
-
+    cout << nibble_to_hex(byte >> 4)
+         << nibble_to_hex(byte & 0xf);
 }
 
 int main()
