@@ -40,6 +40,27 @@ print_in_hex(const void* data, size_t size)
     }
 }
 
+char
+bit_digit(uint8_t byte, uint8_t bit)
+{
+    if (byte & (0x1 << bit))
+    {
+        return '1';
+    }
+    return '0';
+}
+
+void
+print_in_binary(uint8_t byte)
+{
+    for (uint8_t bit = 7; bit > 0; bit--)
+    {
+        cout << bit_digit(byte, bit);
+        if (bit==0)
+            return;
+    }
+}
+
 int main()
 {
     assert(nibble_to_hex(0x0) == '0');
